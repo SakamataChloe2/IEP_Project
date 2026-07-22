@@ -32,11 +32,16 @@ void Temperature_Monitor(){
 }
 
 //Lights Function
-void Lights_Display(){
+void Lights_Display(int LightCode){
 
 }
 
 //Buzzer Function
-void 
+void Buzzer(int BuzzCode){
+
+}
 
 //Checker function
+int Computation(){
+  
+}

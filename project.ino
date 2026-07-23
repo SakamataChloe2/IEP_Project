@@ -13,7 +13,7 @@
 
 //2 Output Functions that will either play a buzzer tone or flash the LED’s. 
 // Using the argument from the computational function it can produce a unique output based on which of the monitors is abnormal. 
-// The 2 outputs will continuously play until the issue is resolved (the user pushes a button). After which the program will go back to monitoring.
+// The 2 outputs will continuously play until the issue is resolved (the user uses a remote to off it). After which the program will go back to monitoring.
 
 //Pins
 
@@ -33,32 +33,32 @@ void loop() {
 
 }
 
-//LDR loop 
+//LDR loop(SakamataChloe2)
 void LDR_Monitor(){
 
 }
 
-//Humidity loop
+//Humidity loop(Commie-debug)
 void Humidity_Monitor(){
 
 }
 
-//Temperature loop
+//Temperature loop(Commie-debug)
 void Temperature_Monitor(){
 
 }
 
-//Lights Function
+//Lights Function(SakamataChloe2)
 void Lights_Display(int LightCode){
 
 }
 
-//Buzzer Function
+//Buzzer Function(SakamataChloe2)
 void Buzzer(int BuzzCode){
 
 }
 
-//Checker function
+//Checker function(Commie-debug)
 int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
   
 }

@@ -1,5 +1,5 @@
 // Abel(SakamataChloe2), P2603281, DCPE/FT/1B/22, Introduction to Engineering Programming
-// Rithik(Commie_Debug), P263, DCPE/FT/1B/22, Introduction to Engineering Programming
+// Rithik(Commie-debug), P263, DCPE/FT/1B/22, Introduction to Engineering Programming
 
 //Description:
 //3 Monitor/Input Functions that will run at the start of setup(). 

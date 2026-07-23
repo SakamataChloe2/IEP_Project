@@ -1,3 +1,4 @@
+
 //Pins
 
 //Functions
@@ -42,6 +43,6 @@ void Buzzer(int BuzzCode){
 }
 
 //Checker function
-int Computation(){
+int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
   
 }

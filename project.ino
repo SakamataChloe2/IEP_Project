@@ -22,6 +22,7 @@
 #include <DHT.h>
 #include <IRremote.hpp>
 #include "RichShieldTM1637.h"
+#include <Wire.h>
 
 
 //Pins and threshold constants
@@ -75,7 +76,20 @@ void loop() {
 
 //LDR loop(SakamataChloe2)
 int LDR_Monitor(){
+int Light = analogRead(PIN_LDR);
 
+  Serial.print(F("Light: "));
+  Serial.printIN(Light);
+
+  if(Light <= 500){
+    return 1;
+  }
+  else if(Light => 500){
+    return 2;
+  }
+  else{
+    return 0;
+  }
 }
 
 //Humidity loop(Commie-debug)
@@ -107,7 +121,26 @@ int Humidity_Monitor(){
 
 //Temperature loop(SakamataChloe2)
 int Temperature_Monitor(){
+ temperature[2];
+  for(i =   2; i == 0; i--){
+    Temperature[i] = analogRead(PIN_NTC);
+    delay(250);
+  }
+ 
+ sum = Tmeperature[0] + Temperature[1] + Temperature[2]
+ 
+ int Temperature = analogroad(PIN_NTC);
 
+  if(Temperature < TEMP_LOW_C){
+    return 2;
+  }
+  else if(Temperature > TEMP_HIGH_C){
+    return 1;
+  }
+  else{
+    return 0;
+  }
+}
 }
 
 //Lights Function(SakamataChloe2)

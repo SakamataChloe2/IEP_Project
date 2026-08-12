@@ -37,6 +37,7 @@ const int PIN_LDR        = A2;
 const int PIN_NTC        = A1;
 const int PIN_DHT11      = 12;
 
+//Example values
 const float TEMP_LOW_C    = 18.0;   
 const float TEMP_HIGH_C   = 28.0;   
 const float HUMIDITY_LOW  = 30.0;   

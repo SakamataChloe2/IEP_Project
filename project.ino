@@ -82,16 +82,12 @@ int Light = analogRead(PIN_LDR);
   Serial.print(F("Light: "));
   Serial.printIN(Light);
 
-  if(Light <= 500){
+  if(Light < 500){
     return 1;
   }
-  else if(Light => 500){
-    return 2;
-  }
-  else{
+  else(Light > 500){
     return 0;
   }
-}
 
 //Humidity loop(Commie-debug)
 int Humidity_Monitor(){
@@ -122,21 +118,22 @@ int Humidity_Monitor(){
 
 //Temperature loop(SakamataChloe2)
 int Temperature_Monitor(){
+  int i;
  temperature[2];
-  for(i =   2; i == 0; i--){
+  for(i = 2; i == 0; i--){
     Temperature[i] = analogRead(PIN_NTC);
     delay(250);
   }
  
- sum = Tmeperature[0] + Temperature[1] + Temperature[2]
+ sum = Tmeperature[0] + Temperature[1] + Temperature[2];
  
  int Temperature = analogroad(PIN_NTC);
 
   if(Temperature < TEMP_LOW_C){
-    return 2;
+    return 1;
   }
   else if(Temperature > TEMP_HIGH_C){
-    return 1;
+    return 2;
   }
   else{
     return 0;
@@ -145,19 +142,37 @@ int Temperature_Monitor(){
 
 //Lights Function(SakamataChloe2)
 void High_Temp_Lights(){
-
+   digitalWrite(PIN_LED_YELLOW, HIGH);
+   delay(250);
+   digitalWrite(PIN_LED_YELLOW, LOW);
 }
 void Low_Temp_Lights(){
-
+   digitalWrite(PIN_LED_GREEN, HIGH);
+   delay(250);
+   digitalWrite(PIN_LED_GREEN, LOW);
 }
 void High_Humidity_Lights(){
-
+   digitalWrite(PIN_LED_BLUE, HIGH);
+   delay(250);
+   digitalWrite(PIN_LED_BLUE, LOW);
 }
 void Low_Humidity_Lights(){
-
+   digitalWrite(PIN_LED_RED, HIGH);
+   delay(250);
+   digitalWrite(PIN_LED_RED, LOW);
 }
 void Intruder_Alert_Red_Spy_In_The_Base(){
-
+    digitalWrite(PIN_LED_RED, HIGH);
+    digitalWrite(PIN_LED_BLUE, HIGH);
+    digitalWrite(PIN_LED_GREEN, HIGH); 
+    digitalWrite(PIN_LED_YELLOW, HIGH);
+  
+    delay(250);
+  
+    digitalWrite(PIN_LED_RED, LOW);
+    digitalWrite(PIN_LED_BLUE, LOW);
+    digitalWrite(PIN_LED_GREEN, LOW);
+    digitalWrite(PIN_LED_YELLOW, LOW);
 }
 
 

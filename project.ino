@@ -43,8 +43,8 @@ const float TEMP_LOW_C = 18.0;
 const float TEMP_HIGH_C = 28.0;   
 const float HUMIDITY_LOW = 30.0;   
 const float HUMIDITY_HIGH = 70.0;   
-const int   LDR_DARK_THRESHOLD = 200;  
-const int   LDR_BRIGHT_THRESHOLD = 850;  
+const int LDR_DARK_THRESHOLD = 200;  
+const int LDR_BRIGHT_THRESHOLD = 850;  
 const float NTC_NOMINAL_RES = 10000.0; 
 const float NTC_NOMINAL_TEMP = 25.0;
 const float NTC_BETA = 3950.0;
@@ -64,8 +64,9 @@ void loop() {
 
   LDRVal = LDR_Monitor();
   HUMVal = Humidity_Monitor();
-  TEMPVal = Temperature_Monitor()
-  
+  TEMPVal = Temperature_Monitor();
+  Computation(LDRVal, HUMVal, TEMPVal);
+
   //LDR loop for detecting change in light levels to figure out if an intruder has arrived, return a int val
   //Humidity loop for detecting a change in humidity, return a int val
   //Temperature loop for detecting a change in temperature, return a int val
@@ -196,5 +197,50 @@ void Intruder_Alert_Blue_Spy_In_The_Base(){
 
 //Checker function(Commie-debug)
 int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
+  int Abnormal = 0;
+  
+  //LDR_Val_Check
+  if ((LDR_Val == 1) or (Humidity_Val == 1) or (Humidity_Val == 2) or (Temp_Val == 1) or (Temp_Val == 2)){
+    Abnormal = 1;
+
+  }
+
+  while (Abnormal == 1) {
+    
+    //Buzzers & Lights
+    if (LDR_Val == 1){
+      Intruder_Alert_Red_Spy_In_The_Base();
+      Intruder_Alert_Blue_Spy_In_The_Base();
+    }
+    
+    if (Humidity_Val == 1){
+      Low_Humidity_Lights();
+      Low_Humidity_Buzzer();
+    }
+    else{
+      if (Humidity_Val == 2){
+        High_Humidity_Lights();
+        High_Humidity_Buzzer();
+      }
+    }
+
+    if (Temp_Val == 1){
+      Low_Temp_Lights();
+      Low_Temp_Buzzer();
+    }
+    else{
+      if (Temp_Val == 2){
+        High_Temp_Lights();
+        High_Temp_Buzzer();
+      }
+    }
+    
+    if (IrReceiver.decode()) {
+      IrReceiver.resume();
+      isAbnormal = false;  
+    }
+  }
+  
+  return 0; // Return to the main loop once resolved
   
 }

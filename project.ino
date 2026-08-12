@@ -22,6 +22,7 @@
 #include <DHT.h>
 #include <IRremote.hpp>
 #include "RichShieldTM1637.h"
+#include "RichShieldNTC.h"
 #include <Wire.h>
 
 
@@ -53,10 +54,14 @@ const float NTC_SERIES_RES = 10000.0;
 
 //Functions
 void setup() {
+  Serial.begin(9600); 
+  IrReceiver.begin(PIN_IR_RECV, ENABLE_LED_FEEDBACK); 
   dht.begin();
   pinMode(PIN_BUZZER, OUTPUT);
-
-
+  pinMode(PIN_LED_RED, OUTPUT);
+  pinMode(PIN_LED_GREEN, OUTPUT);
+  pinMode(PIN_LED_BLUE, OUTPUT);
+  pinMode(PIN_LED_YELLOW, OUTPUT);
 }
 
 void loop() {
@@ -258,10 +263,10 @@ int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
     
     if (IrReceiver.decode()) {
       IrReceiver.resume();
-      isAbnormal = false;  
+      Abnormal = 0;  
     }
   }
   
-  return 0; // Return to the main loop once resolved
+  return 0; //Return to the main loop once resolved
   
 }

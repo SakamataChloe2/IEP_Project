@@ -82,22 +82,24 @@ void loop() {
 
 //LDR loop(SakamataChloe2)
 int LDR_Monitor(){
-int Light = analogRead(PIN_LDR);
+ int i;
+  float Total, Avg;
+  Total = 0;
+  float TempVals[3];
 
-  Serial.print(F("Light: "));
-  Serial.printIN(Light);
+  for(i=0;i<3;i++){
+     LDR_Vals[i] = analogRead(PIN_LDR);
+     delay(250);
+     Total += LDR_Vals[i];
+  }
+  Avg = Total/3;
 
-  if(Light < 500){
+  if (Avg < LDR_BRIGHT_THRESHOLD){
     return 1;
   }
   else{
-    if (Light > 500){
-      return 2;
-    }
-    else{
+    if (Avg > LDR_BRIGHT_THRESHOLD){
       return 0;
-    }
-  }
 }
 
 //Humidity loop(Commie-debug)
@@ -129,25 +131,28 @@ int Humidity_Monitor(){
 
 //Temperature loop(SakamataChloe2)
 int Temperature_Monitor(){ //similiar to humdity code?
-  int i;
-  int Temperpature[2]; //int or float or just temperature[2]
-  for(i = 2; i == 0; i--){
-    Temperature[i] = analogRead(PIN_NTC);
-    delay(250);
-  }
- 
- sum = Tmeperature[0] + Temperature[1] + Temperature[2]; //why this but not sum += temp[i]
- Avg_Temp = sum / 3 //average value want or no?
- int Avg_Temp = analogroad(PIN_NTC); //change back to Temperature of Avg value is no
+   int i;
+  float Total, Avg;
+  Total = 0;
+  float TempVals[3];
 
-  if(Avg_Temp < TEMP_LOW_C){ //change back to Temperature of Avg value is no
+  for(i=0;i<3;i++){
+     TempVals[i] = analogRead(PIN_NTC);
+     delay(250);
+     Total += TempVals[i];
+  }
+  Avg = Total/3;
+
+  if (Avg < TEMP_LOW_C){
     return 1;
   }
-  else if(Avg_Temp > TEMP_HIGH_C){ //change back to Temperature of Avg value is no
-    return 2;
-  }
   else{
-    return 0;
+    if (Avg > TEMP_HIGH_C){
+      return 2;
+    }
+    else{
+      return 0;
+    }
   }
 }
 

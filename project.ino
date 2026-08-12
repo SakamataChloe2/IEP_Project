@@ -82,7 +82,7 @@ void loop() {
 
 //LDR loop(SakamataChloe2)
 int LDR_Monitor(){
- int i;
+  int i;
   float Total, Avg;
   Total = 0;
   float TempVals[3];
@@ -100,6 +100,8 @@ int LDR_Monitor(){
   else{
     if (Avg > LDR_BRIGHT_THRESHOLD){
       return 0;
+    }
+  }
 }
 
 //Humidity loop(Commie-debug)

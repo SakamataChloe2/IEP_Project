@@ -15,7 +15,27 @@
 // Using the argument from the computational function it can produce a unique output based on which of the monitors is abnormal. 
 // The 2 outputs will continuously play until the issue is resolved (the user uses a remote to off it). After which the program will go back to monitoring.
 
+//Libraries
+#include "RichShieldDHT.h"
+#include "RichShieldPassiveBuzzer.h"
+#include <DHT.h>
+#include <IRremote.hpp>
+
+
 //Pins
+
+const int PIN_LED_RED    = 4;
+const int PIN_LED_GREEN  = 5;
+const int PIN_LED_BLUE   = 6;
+const int PIN_LED_YELLOW = 7;
+const int PIN_KEY1       = 8;
+const int PIN_KEY2       = 9;
+const int PIN_BUZZER     = 3;
+const int PIN_IR_RECV    = 2;
+const int PIN_LDR        = A2;
+const int PIN_NTC        = A1;
+const int PIN_DHT11      = 12;
+
 
 //Functions
 
@@ -43,17 +63,17 @@ void Humidity_Monitor(){
 
 }
 
-//Temperature loop(Commie-debug)
+//Temperature loop(SakamataChloe2)
 void Temperature_Monitor(){
 
 }
 
-//Lights Function(SakamataChloe2)
+//Lights Function(Commie-debug)
 void Lights_Display(int LightCode){
 
 }
 
-//Buzzer Function(SakamataChloe2)
+//Buzzer Function(Commie-debug)
 void Buzzer(int BuzzCode){
 
 }

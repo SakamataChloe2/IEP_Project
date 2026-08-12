@@ -21,43 +21,49 @@
 #include "RichShieldPassiveBuzzer.h"
 #include <DHT.h>
 #include <IRremote.hpp>
+#include "RichShieldTM1637.h"
 
 
 //Pins and threshold constants
-
-const int PIN_LED_RED    = 4;
-const int PIN_LED_GREEN  = 5;
-const int PIN_LED_BLUE   = 6;
+const int PIN_LED_RED = 4;
+const int PIN_LED_GREEN = 5;
+const int PIN_LED_BLUE = 6;
 const int PIN_LED_YELLOW = 7;
-const int PIN_KEY1       = 8;
-const int PIN_KEY2       = 9;
-const int PIN_BUZZER     = 3;
-const int PIN_IR_RECV    = 2;
-const int PIN_LDR        = A2;
-const int PIN_NTC        = A1;
-const int PIN_DHT11      = 12;
+const int PIN_KEY1 = 8;
+const int PIN_KEY2 = 9;
+const int PIN_BUZZER = 3;
+const int PIN_IR_RECV = 2;
+const int PIN_LDR = A2;
+const int PIN_NTC = A1;
+const int PIN_DHT11 = 12;
 
-//Example values
-const float TEMP_LOW_C    = 18.0;   
-const float TEMP_HIGH_C   = 28.0;   
-const float HUMIDITY_LOW  = 30.0;   
+//Example values for thresholds
+const float TEMP_LOW_C = 18.0;   
+const float TEMP_HIGH_C = 28.0;   
+const float HUMIDITY_LOW = 30.0;   
 const float HUMIDITY_HIGH = 70.0;   
-const int   LDR_DARK_THRESHOLD   = 200;  
+const int   LDR_DARK_THRESHOLD = 200;  
 const int   LDR_BRIGHT_THRESHOLD = 850;  
-const float NTC_NOMINAL_RES   = 10000.0; 
-const float NTC_NOMINAL_TEMP  = 25.0;
-const float NTC_BETA          = 3950.0;
-const float NTC_SERIES_RES    = 10000.0; 
+const float NTC_NOMINAL_RES = 10000.0; 
+const float NTC_NOMINAL_TEMP = 25.0;
+const float NTC_BETA = 3950.0;
+const float NTC_SERIES_RES = 10000.0; 
 
 
 //Functions
-
 void setup() {
+  dht.begin();
+  pinMode(PIN_BUZZER, OUTPUT);
 
 
 }
 
 void loop() {
+  int LDRVal, HUMVal, TEMPVal;
+
+  LDRVal = LDR_Monitor();
+  HUMVal = Humidity_Monitor();
+  TEMPVal = Temperature_Monitor()
   
   //LDR loop for detecting change in light levels to figure out if an intruder has arrived, return a int val
   //Humidity loop for detecting a change in humidity, return a int val
@@ -74,7 +80,28 @@ int LDR_Monitor(){
 
 //Humidity loop(Commie-debug)
 int Humidity_Monitor(){
+  int i;
+  float Total, Avg;
+  float HumVals[3];
 
+  for(i=0;i<3;i++){
+     HumVals[i] = dht.readHumidity();
+     delay(250);
+     Total += HumVals[i];
+  }
+  Avg = Total/3;
+
+  if (Avg < HUMIDITY_LOW){
+    return 1;
+  }
+  else{
+    if (Avg > HUMIDITY_HIGH){
+      return 2;
+    }
+    else{
+      return 0;
+    }
+  }
 }
 
 //Temperature loop(SakamataChloe2)
@@ -102,22 +129,35 @@ void Intruder_Alert_Red_Spy_In_The_Base(){
 
 //Buzzer Function(Commie-debug)
 void High_Temp_Buzzer(){
-
+  tone(buzzerPin, 1500, 200); 
+  delay(250);
+  tone(buzzerPin, 1000, 200); 
+  delay(250);
 }
 void Low_Temp_Buzzer(){
-
+  tone(buzzerPin, 400, 400); 
+  delay(450);
+  tone(buzzerPin, 300, 400); 
+  delay(450);
+  tone(buzzerPin, 200, 800); 
+  delay(850);
 }
 void High_Humidity_Buzzer(){
-
+  tone(buzzerPin, 600, 100); delay(120);
+  tone(buzzerPin, 800, 100); delay(120);
+  tone(buzzerPin, 1000, 100); delay(120);
+  tone(buzzerPin, 1200, 300); delay(400);
 }
 void Low_Humidity_Buzzer(){
-
+  tone(buzzerPin, 2500, 30); 
+  delay(400);
 }
 void Intruder_Alert_Blue_Spy_In_The_Base(){
-
+  tone(buzzerPin, 1200, 150); 
+  delay(150);
+  tone(buzzerPin, 700, 150);  
+  delay(150);
 }
-
-
 
 
 //Checker function(Commie-debug)

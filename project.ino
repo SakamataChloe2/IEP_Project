@@ -14,7 +14,7 @@
 
 //2 Output Functions that will either play a buzzer tone or flash the LED’s. 
 // Using the argument from the computational function it can produce a unique output based on which of the monitors is abnormal. 
-// The 2 outputs will continuously play until the issue is resolved (the user uses a remote to off it). After which the program will go back to monitoring.
+// The 2 outputs will continuously play until the issue is resolved (the user uses a remote to off it). After which the program will go back to monitoring. (It will be repeating while inside of the Computation Loop)
 
 //Libraries
 #include "RichShieldDHT.h"

@@ -117,7 +117,7 @@ int Humidity_Monitor(){
 }
 
 //Temperature loop(SakamataChloe2)
-int Temperature_Monitor(){
+int Temperature_Monitor(){ //similiar to humdity code?
   int i;
   int Temperpature[2]; //int or float or just temperature[2]
   for(i = 2; i == 0; i--){
@@ -141,38 +141,41 @@ int Temperature_Monitor(){
 }
 
 //Lights Function(SakamataChloe2)
-void High_Temp_Lights(){
+void High_Temp_Lights(){ //blink blink or no blink blink
    digitalWrite(PIN_LED_YELLOW, HIGH);
    delay(250);
    digitalWrite(PIN_LED_YELLOW, LOW);
+   delay(250);
 }
 void Low_Temp_Lights(){
    digitalWrite(PIN_LED_GREEN, HIGH);
    delay(250);
    digitalWrite(PIN_LED_GREEN, LOW);
+   delay(250);
 }
 void High_Humidity_Lights(){
    digitalWrite(PIN_LED_BLUE, HIGH);
    delay(250);
    digitalWrite(PIN_LED_BLUE, LOW);
+   delay(250);
 }
 void Low_Humidity_Lights(){
    digitalWrite(PIN_LED_RED, HIGH);
    delay(250);
    digitalWrite(PIN_LED_RED, LOW);
+   delay(250);
 }
 void Intruder_Alert_Red_Spy_In_The_Base(){
-    digitalWrite(PIN_LED_RED, HIGH);
-    digitalWrite(PIN_LED_BLUE, HIGH);
-    digitalWrite(PIN_LED_GREEN, HIGH); 
-    digitalWrite(PIN_LED_YELLOW, HIGH);
-  
-    delay(250);
-  
-    digitalWrite(PIN_LED_RED, LOW);
-    digitalWrite(PIN_LED_BLUE, LOW);
-    digitalWrite(PIN_LED_GREEN, LOW);
-    digitalWrite(PIN_LED_YELLOW, LOW);
+   digitalWrite(PIN_LED_RED, HIGH);
+   digitalWrite(PIN_LED_BLUE, HIGH);
+   digitalWrite(PIN_LED_GREEN, HIGH); 
+   digitalWrite(PIN_LED_YELLOW, HIGH);
+   delay(250);
+   digitalWrite(PIN_LED_RED, LOW);
+   digitalWrite(PIN_LED_BLUE, LOW);
+   digitalWrite(PIN_LED_GREEN, LOW);
+   digitalWrite(PIN_LED_YELLOW, LOW);
+   delay(250);
 }
 
 

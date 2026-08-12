@@ -22,7 +22,7 @@
 #include <IRremote.hpp>
 
 
-//Pins
+//Pins and threshold constants
 
 const int PIN_LED_RED    = 4;
 const int PIN_LED_GREEN  = 5;
@@ -36,6 +36,17 @@ const int PIN_LDR        = A2;
 const int PIN_NTC        = A1;
 const int PIN_DHT11      = 12;
 
+const float TEMP_LOW_C    = 18.0;   
+const float TEMP_HIGH_C   = 28.0;   
+const float HUMIDITY_LOW  = 30.0;   
+const float HUMIDITY_HIGH = 70.0;   
+const int   LDR_DARK_THRESHOLD   = 200;  
+const int   LDR_BRIGHT_THRESHOLD = 850;  
+const float NTC_NOMINAL_RES   = 10000.0; 
+const float NTC_NOMINAL_TEMP  = 25.0;
+const float NTC_BETA          = 3950.0;
+const float NTC_SERIES_RES    = 10000.0; 
+
 
 //Functions
 
@@ -45,6 +56,7 @@ void setup() {
 }
 
 void loop() {
+  
   //LDR loop for detecting change in light levels to figure out if an intruder has arrived, return a int val
   //Humidity loop for detecting a change in humidity, return a int val
   //Temperature loop for detecting a change in temperature, return a int val

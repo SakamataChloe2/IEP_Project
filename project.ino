@@ -142,7 +142,6 @@ int Temperature_Monitor(){
     return 0;
   }
 }
-}
 
 //Lights Function(SakamataChloe2)
 void High_Temp_Lights(){

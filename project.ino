@@ -219,11 +219,9 @@ int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
   //LDR_Val_Check
   if ((LDR_Val == 1) or (Humidity_Val == 1) or (Humidity_Val == 2) or (Temp_Val == 1) or (Temp_Val == 2)){
     Abnormal = 1;
-
   }
 
   while (Abnormal == 1) {
-    
     //Buzzers & Lights
     if (LDR_Val == 1){
       Intruder_Alert_Red_Spy_In_The_Base();

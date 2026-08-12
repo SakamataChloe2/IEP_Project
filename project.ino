@@ -85,8 +85,13 @@ int Light = analogRead(PIN_LDR);
   if(Light < 500){
     return 1;
   }
-  else(Light > 500){
-    return 0;
+  else{
+    if (Light > 500){
+      return 2;
+    }
+    else{
+      return 0;
+    }
   }
 }
 

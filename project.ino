@@ -54,17 +54,17 @@ void loop() {
 }
 
 //LDR loop(SakamataChloe2)
-void LDR_Monitor(){
+int LDR_Monitor(){
 
 }
 
 //Humidity loop(Commie-debug)
-void Humidity_Monitor(){
+int Humidity_Monitor(){
 
 }
 
 //Temperature loop(SakamataChloe2)
-void Temperature_Monitor(){
+int Temperature_Monitor(){
 
 }
 

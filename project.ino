@@ -80,15 +80,43 @@ int Temperature_Monitor(){
 
 }
 
-//Lights Function(Commie-debug)
-void Lights_Display(int LightCode){
+//Lights Function(SakamataChloe2)
+void High_Temp_Lights(){
 
 }
+void Low_Temp_Lights(){
+
+}
+void High_Humidity_Lights(){
+
+}
+void Low_Humidity_Lights(){
+
+}
+void Intruder_Alert_Red_Spy_In_The_Base(){
+
+}
+
 
 //Buzzer Function(Commie-debug)
-void Buzzer(int BuzzCode){
+void High_Temp_Buzzer(){
 
 }
+void Low_Temp_Buzzer(){
+
+}
+void High_Humidity_Buzzer(){
+
+}
+void Low_Humidity_Buzzer(){
+
+}
+void Intruder_Alert_Blue_Spy_In_The_Base(){
+
+}
+
+
+
 
 //Checker function(Commie-debug)
 int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){

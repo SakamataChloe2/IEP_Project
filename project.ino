@@ -82,6 +82,7 @@ int LDR_Monitor(){
 int Humidity_Monitor(){
   int i;
   float Total, Avg;
+  Total = 0;
   float HumVals[3];
 
   for(i=0;i<3;i++){
@@ -129,33 +130,33 @@ void Intruder_Alert_Red_Spy_In_The_Base(){
 
 //Buzzer Function(Commie-debug)
 void High_Temp_Buzzer(){
-  tone(buzzerPin, 1500, 200); 
+  tone(PIN_BUZZER, 1500, 200); 
   delay(250);
-  tone(buzzerPin, 1000, 200); 
+  tone(PIN_BUZZER, 1000, 200); 
   delay(250);
 }
 void Low_Temp_Buzzer(){
-  tone(buzzerPin, 400, 400); 
+  tone(PIN_BUZZER, 400, 400); 
   delay(450);
-  tone(buzzerPin, 300, 400); 
+  tone(PIN_BUZZER, 300, 400); 
   delay(450);
-  tone(buzzerPin, 200, 800); 
+  tone(PIN_BUZZER, 200, 800); 
   delay(850);
 }
 void High_Humidity_Buzzer(){
-  tone(buzzerPin, 600, 100); delay(120);
-  tone(buzzerPin, 800, 100); delay(120);
-  tone(buzzerPin, 1000, 100); delay(120);
-  tone(buzzerPin, 1200, 300); delay(400);
+  tone(PIN_BUZZER, 600, 100); delay(120);
+  tone(PIN_BUZZER, 800, 100); delay(120);
+  tone(PIN_BUZZER, 1000, 100); delay(120);
+  tone(PIN_BUZZER, 1200, 300); delay(400);
 }
 void Low_Humidity_Buzzer(){
-  tone(buzzerPin, 2500, 30); 
+  tone(PIN_BUZZER, 2500, 30); 
   delay(400);
 }
 void Intruder_Alert_Blue_Spy_In_The_Base(){
-  tone(buzzerPin, 1200, 150); 
+  tone(PIN_BUZZER, 1200, 150); 
   delay(150);
-  tone(buzzerPin, 700, 150);  
+  tone(PIN_BUZZER, 700, 150);  
   delay(150);
 }
 

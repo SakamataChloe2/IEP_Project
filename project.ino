@@ -88,6 +88,7 @@ int Light = analogRead(PIN_LDR);
   else(Light > 500){
     return 0;
   }
+}
 
 //Humidity loop(Commie-debug)
 int Humidity_Monitor(){

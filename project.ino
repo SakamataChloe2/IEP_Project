@@ -119,20 +119,20 @@ int Humidity_Monitor(){
 //Temperature loop(SakamataChloe2)
 int Temperature_Monitor(){
   int i;
- temperature[2];
+  int Temperpature[2]; //int or float or just temperature[2]
   for(i = 2; i == 0; i--){
     Temperature[i] = analogRead(PIN_NTC);
     delay(250);
   }
  
- sum = Tmeperature[0] + Temperature[1] + Temperature[2];
- 
- int Temperature = analogroad(PIN_NTC);
+ sum = Tmeperature[0] + Temperature[1] + Temperature[2]; //why this but not sum += temp[i]
+ Avg_Temp = sum / 3 //average value want or no?
+ int Avg_Temp = analogroad(PIN_NTC); //change back to Temperature of Avg value is no
 
-  if(Temperature < TEMP_LOW_C){
+  if(Avg_Temp < TEMP_LOW_C){ //change back to Temperature of Avg value is no
     return 1;
   }
-  else if(Temperature > TEMP_HIGH_C){
+  else if(Avg_Temp > TEMP_HIGH_C){ //change back to Temperature of Avg value is no
     return 2;
   }
   else{

@@ -39,8 +39,8 @@ const int PIN_NTC = A1;
 const int PIN_DHT11 = 12;
 
 //Example values for thresholds
-const float TEMP_LOW_C = 18.0;   
-const float TEMP_HIGH_C = 30.0;   
+const float TEMP_LOW_C = 13.0;   
+const float TEMP_HIGH_C = 15.0;   
 const float HUMIDITY_LOW = 30.0;   
 const float HUMIDITY_HIGH = 70.0;   
 const int LDR_DARK_THRESHOLD = 200;  
@@ -144,7 +144,7 @@ int Temperature_Monitor(){
   float TempVals[3];
 
   for(i = 0; i < 3; i++){
-    TempVals[i] = analogRead(PIN_NTC);
+    TempVals[i] = temper.getTemperature(PIN_NTC);
     delay(250);
     Total += TempVals[i];
   }

@@ -55,9 +55,8 @@ IRrecv IR(PIN_IR_RECV);
 
 //Functions
 void setup() {
-  Serial.begin(9600); 
-  
   dht.begin();
+  Serial.begin(9600); 
   pinMode(PIN_BUZZER, OUTPUT);
   pinMode(PIN_LED_RED, OUTPUT);
   pinMode(PIN_LED_GREEN, OUTPUT);

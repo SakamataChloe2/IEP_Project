@@ -86,7 +86,7 @@ int LDR_Monitor(){
   int i;
   float Total, Avg;
   Total = 0;
-  float TempVals[3];
+  float LDR_Vals[3];
 
   for(i=0;i<3;i++){
      LDR_Vals[i] = analogRead(PIN_LDR);

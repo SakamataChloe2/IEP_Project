@@ -46,7 +46,6 @@ const float HUMIDITY_HIGH = 70.0;
 const int LDR_DARK_THRESHOLD = 200;  
 const int LDR_BRIGHT_THRESHOLD = 850;  
 
-
 IRrecv IR(PIN_IR_RECV);
 DHT dht;
 NTC temper(PIN_NTC);

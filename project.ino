@@ -144,7 +144,7 @@ int Temperature_Monitor(){
   float TempVals[3];
 
   for(i = 0; i < 3; i++){
-    TempVals[i] = temper.getTemperature(PIN_NTC);
+    TempVals[i] = temper.getTemperature();
     delay(250);
     Total += TempVals[i];
   }

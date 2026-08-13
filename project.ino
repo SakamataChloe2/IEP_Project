@@ -52,6 +52,7 @@ const float NTC_SERIES_RES = 10000.0;
 
 IRrecv IR(PIN_IR_RECV);
 DHT dht;
+NTC temper(PIN_NTC);
 
 
 //Functions

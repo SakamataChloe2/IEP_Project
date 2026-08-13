@@ -276,29 +276,29 @@ int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
   while (Abnormal == 1) {
     //Buzzers & Lights
     if (LDR_Val == 1){
-      Intruder_Alert_Red_Spy_In_The_Base();
       Intruder_Alert_Blue_Spy_In_The_Base();
+      Intruder_Alert_Red_Spy_In_The_Base();
     }
     
     if (Humidity_Val == 1){
-      Low_Humidity_Lights();
       Low_Humidity_Buzzer();
+      Low_Humidity_Lights();
     }
     else{
       if (Humidity_Val == 2){
-        High_Humidity_Lights();
         High_Humidity_Buzzer();
+        High_Humidity_Lights();
       }
     }
 
     if (Temp_Val == 1){
-      Low_Temp_Lights();
       Low_Temp_Buzzer();
+      Low_Temp_Lights();
     }
     else{
       if (Temp_Val == 2){
-        High_Temp_Lights();
         High_Temp_Buzzer();
+        High_Temp_Lights();
       }
     }
     

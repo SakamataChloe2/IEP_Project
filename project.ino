@@ -40,7 +40,7 @@ const int PIN_DHT11 = 12;
 
 //Example values for thresholds
 const float TEMP_LOW_C = 18.0;   
-const float TEMP_HIGH_C = 28.0;   
+const float TEMP_HIGH_C = 30.0;   
 const float HUMIDITY_LOW = 30.0;   
 const float HUMIDITY_HIGH = 70.0;   
 const int LDR_DARK_THRESHOLD = 200;  
@@ -51,12 +51,16 @@ const float NTC_BETA = 3950.0;
 const float NTC_SERIES_RES = 10000.0; 
 
 IRrecv IR(PIN_IR_RECV);
+DHT dht;
 
 
 //Functions
 void setup() {
-  dht.begin();
+
   Serial.begin(9600); 
+  IR.enableIRIn();
+  dht.begin();
+  
   pinMode(PIN_BUZZER, OUTPUT);
   pinMode(PIN_LED_RED, OUTPUT);
   pinMode(PIN_LED_GREEN, OUTPUT);
@@ -106,7 +110,7 @@ int LDR_Monitor(){
 
 //Humidity loop(Commie-debug)
 int Humidity_Monitor(){
-  int i;
+ int i;
   float Total, Avg;
   Total = 0;
   float HumVals[3];
@@ -132,32 +136,33 @@ int Humidity_Monitor(){
 }
 
 //Temperature loop(SakamataChloe2)
-int Temperature_Monitor(){ //similiar to humdity code?
-   int i;
+int Temperature_Monitor(){
+  int i;
   float Total, Avg;
   Total = 0;
   float TempVals[3];
 
-  for(i=0;i<3;i++){
-     TempVals[i] = analogRead(PIN_NTC);
-     delay(250);
-     Total += TempVals[i];
+  for(i = 0; i < 3; i++){
+    TempVals[i] = analogRead(PIN_NTC);
+    delay(250);
+    Total += TempVals[i];
   }
-  Avg = Total/3;
+
+  Avg = Total / 3;
+
+  Serial.print("Average ADC:");
+  Serial.println(Avg);
 
   if (Avg < TEMP_LOW_C){
     return 1;
   }
+  else if (Avg > TEMP_HIGH_C){
+    return 2;
+  }
   else{
-    if (Avg > TEMP_HIGH_C){
-      return 2;
-    }
-    else{
-      return 0;
-    }
+    return 0;
   }
 }
-
 //Lights Function(SakamataChloe2)
 void High_Temp_Lights(){ //blink blink or no blink blink
    digitalWrite(PIN_LED_YELLOW, HIGH);
@@ -198,35 +203,64 @@ void Intruder_Alert_Red_Spy_In_The_Base(){
 
 
 //Buzzer Function(Commie-debug)
-void High_Temp_Buzzer(){
-  tone(PIN_BUZZER, 1500, 200); 
-  delay(250);
-  tone(PIN_BUZZER, 1000, 200); 
-  delay(250);
+void PlayTone(int frequency, int duration) {
+  int period = 1000000 / frequency;
+  int halfPeriod = period / 2;
+
+  unsigned long startTime = millis();
+
+  while (millis() - startTime < duration) {
+    digitalWrite(PIN_BUZZER, HIGH);
+    delayMicroseconds(halfPeriod);
+    digitalWrite(PIN_BUZZER, LOW);
+    delayMicroseconds(halfPeriod);
+  }
+
+  digitalWrite(PIN_BUZZER, LOW);
 }
-void Low_Temp_Buzzer(){
-  tone(PIN_BUZZER, 400, 400); 
-  delay(450);
-  tone(PIN_BUZZER, 300, 400); 
-  delay(450);
-  tone(PIN_BUZZER, 200, 800); 
-  delay(850);
+
+void High_Temp_Buzzer() {
+  PlayTone(1500, 200);
+  delay(50);
+
+  PlayTone(1000, 200);
+  delay(50);
 }
-void High_Humidity_Buzzer(){
-  tone(PIN_BUZZER, 600, 100); delay(120);
-  tone(PIN_BUZZER, 800, 100); delay(120);
-  tone(PIN_BUZZER, 1000, 100); delay(120);
-  tone(PIN_BUZZER, 1200, 300); delay(400);
+
+void Low_Temp_Buzzer() {
+  PlayTone(400, 400);
+  delay(50);
+
+  PlayTone(300, 400);
+  delay(50);
+
+  PlayTone(200, 800);
+  delay(50);
 }
-void Low_Humidity_Buzzer(){
-  tone(PIN_BUZZER, 2500, 30); 
-  delay(400);
+
+void High_Humidity_Buzzer() {
+  PlayTone(600, 100);
+  delay(20);
+
+  PlayTone(800, 100);
+  delay(20);
+
+  PlayTone(1000, 100);
+  delay(20);
+
+  PlayTone(1200, 300);
+  delay(100);
 }
-void Intruder_Alert_Blue_Spy_In_The_Base(){
-  tone(PIN_BUZZER, 1200, 150); 
-  delay(150);
-  tone(PIN_BUZZER, 700, 150);  
-  delay(150);
+
+void Low_Humidity_Buzzer() {
+  PlayTone(2500, 30);
+  delay(370);
+}
+
+void Intruder_Alert_Blue_Spy_In_The_Base() {
+  PlayTone(1200, 150);
+
+  PlayTone(700, 150);
 }
 
 
@@ -268,12 +302,25 @@ int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
       }
     }
     
-    if (IR.decode()) {
+    if (IR.decode()){ 
+      if(IR.isReleased()) {
+        switch(IR.keycode){
+          case KEY_ZERO: PlayTone(1200, 25);break;
+
+          case KEY_MINUS: Abnormal = 0, PlayTone(1200, 150);break;
+
+          default: break;
+        }
+        delay(20);
+
+      }
       IR.resume();
-      Abnormal = 0;  
+      
     }
-  }
   
+
+
   return 0; //Return to the main loop once resolved
   
+}
 }

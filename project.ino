@@ -19,9 +19,8 @@
 //Libraries
 #include "RichShieldDHT.h"
 #include "RichShieldPassiveBuzzer.h"
-#include <DHT.h>
-#include <IRremote.hpp>
 #include "RichShieldTM1637.h"
+#include "RichShieldIRremote.h"
 #include "RichShieldNTC.h"
 #include <Wire.h>
 
@@ -51,11 +50,13 @@ const float NTC_NOMINAL_TEMP = 25.0;
 const float NTC_BETA = 3950.0;
 const float NTC_SERIES_RES = 10000.0; 
 
+IRrecv IR(PIN_IR_RECV);
+
 
 //Functions
 void setup() {
   Serial.begin(9600); 
-  IrReceiver.begin(PIN_IR_RECV, ENABLE_LED_FEEDBACK); 
+  
   dht.begin();
   pinMode(PIN_BUZZER, OUTPUT);
   pinMode(PIN_LED_RED, OUTPUT);
@@ -268,8 +269,8 @@ int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
       }
     }
     
-    if (IrReceiver.decode()) {
-      IrReceiver.resume();
+    if (IR.decode()) {
+      IR.resume();
       Abnormal = 0;  
     }
   }

@@ -45,6 +45,10 @@ const float HUMIDITY_LOW = 30.0;
 const float HUMIDITY_HIGH = 70.0;   
 const int LDR_DARK_THRESHOLD = 200;  
 const int LDR_BRIGHT_THRESHOLD = 850;  
+const float NTC_NOMINAL_RES = 10000.0; 
+const float NTC_NOMINAL_TEMP = 25.0;
+const float NTC_BETA = 3950.0;
+const float NTC_SERIES_RES = 10000.0; 
 
 IRrecv IR(PIN_IR_RECV);
 DHT dht;

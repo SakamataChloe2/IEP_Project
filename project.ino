@@ -303,17 +303,11 @@ int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
     }
     
     if (IR.decode()){ 
-      if(IR.isReleased()) {
-        switch(IR.keycode){
-          case KEY_ZERO: PlayTone(1200, 25);break;
-
-          case KEY_MINUS: Abnormal = 0, PlayTone(1200, 150);break;
-
-          default: break;
-        }
-        delay(20);
-
+      switch(IR.keycode){
+        case KEY_MINUS: Abnormal = 0, PlayTone(1200, 150);break;
+        default: break;
       }
+      delay(20);
       IR.resume();
       
     }

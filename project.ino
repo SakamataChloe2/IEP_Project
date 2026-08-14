@@ -312,8 +312,6 @@ int Computation(int LDR_Val, int Humidity_Val, int Temp_Val){
       IR.resume();
       
     }
-  
-
 
   return 0; //Return to the main loop once resolved
   
